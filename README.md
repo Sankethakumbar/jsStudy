@@ -13,6 +13,7 @@ window:
 - Represents the browser window.
 - All global variables, functions, and the DOM are part of window.
 */
+
 console.log(window);
 
 /*
@@ -20,6 +21,7 @@ document:
 - Represents the HTML document loaded in the browser.
 - Used to access and manipulate HTML elements (DOM).
 */
+
 console.log(document);
 
 /*
@@ -27,6 +29,7 @@ console.dir(document):
 - Displays the document as a JavaScript object.
 - Useful to explore properties and methods of document.
 */
+
 console.dir(document);
 
 /*
@@ -34,6 +37,7 @@ document.baseURI / document.baseURL:
 - Returns the base URL of the current document.
 - Used to know from where the page is loaded.
 */
+
 console.log(document.baseURI);
 console.log(document.baseURL);
 
@@ -44,6 +48,7 @@ document.links:
 - Array methods like map(), filter(), forEach() do NOT work directly.
 - Convert to array using Array.from() before applying array methods.
 */
+
 console.log(document.links);
 
 /* Example conversion:
