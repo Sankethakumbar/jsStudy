@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParentChild</title>
+</head>
+<body>
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+
+
+    <script>
+        // Select the parent element using class selector
+        // querySelector returns the FIRST matching element
+        const parent = document.querySelector(".parent");
+
+        // Select one child element with class "day"
+        // This returns only the FIRST ".day" element
+        const childDayOne = document.querySelector(".day");
+
+
+        // Logs the parent element with a label
+        // Still shows the DOM element because console.log can handle objects
+        console.log("parent", parent);
+
+        // Logs a string and the child element
+        console.log("Dayone", childDayOne);
+
+        // Using template literal with a DOM element
+        // `${parent}` converts the object to string to.string=[object HtmlDivElement]
+        // Objects become "[object HTMLDivElement]"
+        console.log(`parent: ${parent}`);
+
+        // Accessing children of the parent element
+        // children returns an HTMLCollection (array-like object)
+        console.log(parent.children);
+
+        //Accessing parent from child element
+        console.log(childDayOne.parentElement);
+
+        //Access siblings
+        console.log(childDayOne.nextElementSibling)
+
+
+        //loop throughthe child elements
+        for(let i=0;i<parent.children.length;i++){
+            console.log(parent.children[i].innerHTML)
+        }
+
+
+        // childNodes returns ALL child nodes of the parent
+            // Includes:
+            // 1. Element nodes (HTML tags)
+            // 2. Text nodes (spaces, new lines)
+            // 3. Comment nodes
+            // Returned as a NodeList (not an array)
+            // Whitespace in HTML is counted as text nodes
+            console.log(parent.childNodes);
+        //childNodes includes everything — elements + text + comments
+    </script>
+
+    
+</body>
+</html>
