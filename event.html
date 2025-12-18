@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <style>
+        .images img {
+            width: 200px;
+            height: 170px;
+            padding: 10px;
+
+        }
+    </style>
+</head>
+
+<body class="images">
+    <div ><img id="photoshop"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNI8OdKZ4twRm0j-e-aezuBnY7mQbNR-y6bA&s" alt="">
+    </div>
+    <div ><img id="nature"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThRJVnidxK-Jj9FDpnasQy8YXWSE5z5bwGUA&s" alt="">
+    </div>
+
+    <div><a id="link" href="https://google.com" target="_blank">Google</a></div>
+
+
+
+</body>
+<script>
+    document.querySelector(".images").addEventListener("click", function () {
+        alert("Clicked!")
+    }, false);
+
+    //false here is bubling mode from bottom to top
+    document.getElementById("photoshop").addEventListener("click", function () {
+        alert("Photoshop Clicked!")
+    }, false);
+
+    // here is bubling mode 
+    document.getElementById("nature").addEventListener("click", function (e) {
+        alert("Nature Clicked!")
+    }, false); 
+
+    /*//true here is capturing mode from  top to bottom
+        document.getElementById("photoshop").addEventListener("click", function () {
+            alert("Photoshop Clicked!")
+        }, true);
+
+    // here is capturing mode from top to bottom
+        document.getElementById("nature").addEventListener("click", function (e) {
+            alert("Nature Clicked!")
+        }, true); */
+
+    document.getElementById("link").addEventListener("click",function(e){
+        e.preventDefault();
+        e.stopPropagation();//no alert msg bubbling stopped
+        console.log("Clicked google")
+        
+    })
+
+
+    document.querySelector(".images").addEventListener("click", function (e) {
+        console.log(e);
+        console.log(e.target.parentNode)
+        let remove=e.target.parentNode;
+        remove.remove()
+    }, false);
+</script>
+
+</html>
