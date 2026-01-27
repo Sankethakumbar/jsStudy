@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="input" id="textInput" placeholder="Type your message here..."></textarea>
+    <p id="chatCount"></p>
+</body>
+<script>
+    const textInput=document.getElementById("textInput");
+    const chatCount=document.getElementById("chatCount");
+
+    const counter=()=>{
+        if (textInput===""){
+        chatCount.textContent=`Characters: 0/ 100`
+    }
+    else{
+        const charNotextInput.value.length;
+        
+        charCount.textContent=`Characters: ${charNo}/ 100`
+        if(charNo>100){
+            charCount.style.color="red";
+        }
+    }
+
+    }
+    textInput.addEventListener("input",counter)
+    
+</script>
+</html>

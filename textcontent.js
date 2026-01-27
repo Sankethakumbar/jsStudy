@@ -34,3 +34,6 @@ innerHTML:
 - Can insert HTML
 */
 console.log(element.innerHTML);
+
+
+

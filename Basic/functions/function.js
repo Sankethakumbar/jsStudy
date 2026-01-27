@@ -68,4 +68,58 @@ function arrFunction(arr) {
     console.log(arr[1])
 }
 arrFunction(myNewArr);
-arrFunction([1,2,3,4])
+arrFunction([1, 2, 3, 4])
+
+
+/**------------arrow-fn------------- */
+//basic curly braces return keyword written----explicit return
+let add = (n1, n2) => {
+    return n1 + n2;
+}
+
+//implicit return- no return word required
+let add2 = (n1, n2) => n1 + n2;
+
+//wrapped in paraenthesis no need of return
+let add3 = (n1, n2) => (n1 + n2);
+
+//for object we need to wrap in paraenthese
+const add4 = () => ({ username: "sanku" });
+console.log(add4())
+
+/**Difference between regular fn and arrow function */
+
+/**     
+1. reg has its own arguments
+2. reg fn have to explictly return
+3. reg fn define their own execution context(this)
+*/
+
+/**     
+1. arrow fn dont have its own arguments
+2. arrow fn can implicitly return
+3. arrow fn  do not define their own execution context(this)
+*/
+function reg() {
+    console.log("regular fn has arguments ")
+    console.log(arguments)
+};
+reg("hi", 5, true)
+reg()//output-[arguments]{}
+
+
+const arrowfn = () => {
+    console.log("Arrow fn has no arguments ")
+    console.log(arguments)
+}
+arrowfn()
+
+let myObj = {
+    x: 2,
+    regularfn() {
+        console.log(this.x)//gives 2
+    },
+    arrowfn: () => console.log(this.x),//gives undefined
+}
+myObj.regularfn();
+myObj.arrowfn();

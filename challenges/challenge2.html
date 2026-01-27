@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="input-grp">
+        <label for="name">Name of Movie</label>
+        <input type="text" id="name" placeholder="Enter the Name of Movie/series">
+        <button id="search">Search</button>
+    </div>
+
+    <div id="info"> </div>
+    <p id="error"></p>
+
+
+</body>
+<script>
+    const name=document.getElementById("name")
+    const searchBtn=document.getElementById("search")
+    const error=document.getElementById("error")
+    const info=document.getElementById("info")
+
+
+
+
+    const movieDetails=()=>{
+        const nameVal=name.value.trim();
+        error.textContent="";
+        info.textContent="";
+        let  currentData;
+
+        const postDiv=document.createElement("div")
+
+        if (nameVal===""){
+            error.textContent="Please enter name"
+            return
+        }
+
+
+        fetch("http://www.omdbapi.com/?i=tt3896198&apikey=412851c5")
+        .then((response)=>{
+            if(!response.ok){
+                throw new Error("Error")
+            }
+            return response.json()
+        })
+        .then((data)=>{
+            currentData=data
+            console.log(data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+
+        const title=document.createElement("p")
+        title.textContent=currentData.Title
+
+        const year=document.createElement("p")
+        year.textContent=currentData.Year
+
+        const type=document.createElement("p")
+        type.textContent=currentData.Type
+
+        const IMDB=document.createElement("p")
+        IMDB.textContent=currentData.imdbRating
+
+        const img=document.createElement("div")
+        img.textContent=currentData.Poster
+
+
+        postDiv.appendChild(title);
+        postDiv.appendChild(year);
+        
+        postDiv.appendChild(type);
+        postDiv.appendChild(IMDB);
+        postDiv.appendChild(img);
+        
+        
+
+        info.appendChild(postDiv)
+
+    }
+
+        searchBtn.addEventListener("click",movieDetails)
+    movieDetails()
+
+
+</script>
+
+
+
+<!-- An input box where the user can type a movie or series name.
+A Search button.
+A details section that already contains separate elements for each piece of information:
+One element to display the title.
+One element to display the year.
+One element to display the type.
+One element to display the IMDb rating.
+One element (such as a div) to hold the poster image.
+One element to display the plot summary.
+An area to display error messages. -->
+
+</html>

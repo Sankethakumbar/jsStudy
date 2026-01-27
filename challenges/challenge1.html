@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge1</title>
+  </head>
+  <body>
+    <div id="totaldiv"></div>
+    <h3 id="questionText"></h3>
+    <div id="level">
+      <h6 id="category"></h6>
+      <h6 id="difficulty"></h6>
+    </div>
+    <p id="correctAns"></p>
+    <p id="errorMsg"></p>
+    <button id="showAns">Answer</button>
+    <button id="nextQuestion" disabled>Next</button>
+  </body>
+  <script>
+    
+const question = document.getElementById("questionText");
+const difficulty = document.getElementById("difficulty");
+const category = document.getElementById("category");
+const correctAnswer = document.getElementById("correctAns");
+const errorMsg = document.getElementById("errorMsg");
+const showAns = document.getElementById("showAns");
+const nextQuestion = document.getElementById("nextQuestion");
+
+let currentQuestion = null; 
+
+function loadQuestion() {
+  showAns.disabled = false;
+  nextQuestion.disabled = true;
+
+  fetch("https://the-trivia-api.com/v2/questions?limit=1")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response failed");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      question.textContent = currentQuestion.question.text;
+      category.textContent = `Category: ${currentQuestion.category}`;
+      difficulty.textContent = `Difficulty Level: ${currentQuestion.difficulty}`;
+    })
+    .catch(() => {
+      errorMsg.textContent = "Failed to load trivia question.";
+      });
+  }
+
+
+showAns.addEventListener("click", () => {
+  if (!currentQuestion) return;
+
+  correctAnswer.textContent = currentQuestion.correctAnswer;
+  showAns.disabled = true;
+  nextQuestion.disabled = false;
+});
+
+
+nextQuestion.addEventListener("click", () => {
+  loadQuestion();
+});
+
+
+loadQuestion();
+
+
+
+
+  </script>
+</html>

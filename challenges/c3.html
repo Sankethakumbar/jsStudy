@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Toggle</title>
+
+    <style>
+        .answer {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="faqSection">
+        <p class="question">What planet is known as the Red Planet?</p>
+        <p class="answer">Mars.</p>
+
+        <p class="question">What is a baby frog called?</p>
+        <p class="answer">Tadpole</p>
+
+        <p class="question">Which continent is the smallest?</p>
+        <p class="answer">Australia.</p>
+    </div>
+
+    <script>
+        const questions = document.querySelectorAll(".question");
+
+        questions.forEach((ques) => {
+            const displayAnswer=()=>{
+                const answer = ques.nextElementSibling;
+                answer.style.display =
+                    answer.style.display === "block" ? "none" : "block";
+            }
+            ques.addEventListener("click", displayAnswer)
+        });
+    </script>
+</body>
+</html>

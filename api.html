@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search news..." />
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <div id="error"></div>
+
+  <div id="newsGrid" class="grid"></div>
+
+</body>
+
+<script>
+const searchBtn = document.getElementById("searchBtn");
+const searchInput= document.getElementById("searchInput");
+const error = document.getElementById("error");
+const newsGrid = document.getElementById("newsGrid");
+
+const searchForKeyword=async()=>{
+  const keyword=searchInput.value.trim();
+  error.textContent = "";
+  newsGrid.innerHTML=""
+
+  if (keyword===""){
+    error.textContent="Please enter a search keyword."
+    return;
+  }
+  await fetchNews(keyword)
+}
+searchBtn.addEventListener("click",searchForKeyword);
+
+
+const fetchNews=async(keyword)=>{
+  try{
+    const url =
+    `https://newsapi.org/v2/everything?q={{keyword}}&pageSize=9&apiKey=0346b2a32b1a4680b80e7f50cf6a13ac`;
+
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error( `Request failed (${response.status})`);
+    }
+    
+    const data = await response.json();
+
+    if (!data.articles || data.articles.length === 0) {
+      error.textContent = "No news found for that keyword.";
+      return;
+    }
+
+    displayArticles(data.articles);
+  } catch (err) {
+    error.textContent = err.message;
+    newsGrid.innerHTML = "";
+  }
+};
+
+
+const displayArticles = (articles) => {
+  articles.forEach((article) => {
+    const card = document.createElement("div");
+
+    const title = document.createElement("h3");
+    title.textContent = article.title || "No title";
+
+    const source = document.createElement("p");
+    source.textContent = article.source.name || "Unknown source";
+
+    const img = document.createElement("img");
+    img.src = article.urlToImage || "";
+    img.alt = article.urlToImage ? "News image" : "No image available";
+
+    const desc = document.createElement("p");
+    desc.textContent = article.description || "No description";
+
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(source);
+    card.appendChild(desc);
+
+    newsGrid.appendChild(card);
+  });
+};
+
+searchBtn.addEventListener("click", searchForKeyword);
+
+</script>
+</html>
